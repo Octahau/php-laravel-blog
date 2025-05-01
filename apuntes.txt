@@ -1,0 +1,7 @@
+Creando un CMS
+1. Lo primero siempre es mudar el codigo html a php, en las paginas. Despues armar la estructura MVC.
+   Y por ultimo la modularizacion, los cual nos permite separar mejor los objetos con los que vamos a 
+   trabajar, cada bloque es un modulo de cada pagina. Cada pagina tiene sus propios modulos, pero tmb
+   hay modulos que se repiten entre paginas, a esos los reutilizamos. No hace falta tener varios modulos
+   iguales aunque sean de distintas paginas. Esto facilita la reutilizacion.
+2. Objeto JSON: Es cuando tenes un array de objetos, y lo cargamos en la db
