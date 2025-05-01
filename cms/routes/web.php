@@ -17,9 +17,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/anuncios', AnunciosController::class);
-Route::resource('/administradores', AdministradoresController::class)->names([
-    'index' => 'administradores.index'
-]);
+Route::resource('/administradores', AdministradoresController::class);
 Route::resource('/categorias', CategoriasController::class);
 Route::resource('/articulos', ArticulosController::class);
 Route::resource('/opiniones', OpinionesController::class);
