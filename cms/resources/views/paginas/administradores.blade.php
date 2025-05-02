@@ -193,16 +193,17 @@ Crear Administrador Modal
 <!-- =========================
 Editar Administrador Modal
 ========================= -->
-@if (isset($status)) {
+@if (isset($status)) 
   @if($status == 200)
-  {
+  
     @foreach($administradores as $key => $value)
     <div class="modal" id="editarAdministrador">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
     
           <!-- Modal Header -->
-          <form method="POST" action="{{ route('register') }}">
+          <form method="POST" action="{{url('/')}}/administradores/{{$value["id"]}}" enctype="multipart/form-data">
+            @method('PUT')
             @csrf
             <div class="modal-header bg-info">
               <h4 class="modal-title">Editar administrador</h4>
@@ -242,15 +243,16 @@ Editar Administrador Modal
                 <div class="input-group-append input-group-text">
                   <i class="fas fa-key"></i>
                 </div>
-                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Contraseña">
+                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" placeholder="Contraseña">
     
                   @error('password')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                       </span>
                   @enderror
+                  <input type="hidden" name="password_actual" value="{{$value["password"]}}">
+
               </div>
-              <input type="hidden" name="password_actual" value="{{$value["password"]}}">
                   <!-- Rol -->
                   <div class="input-group mb-3">
                     <div class="input-group-append input-group-text">
@@ -303,11 +305,37 @@ Editar Administrador Modal
     <script> 
       $("#editarAdministrador").modal();
     </script>
-  }
+  
+  
   @else
   {{$status}}
   @endif
-  @else
-  
-} @endif
+@endif
+@if(Session::has('no-validacion'))
+        <script>
+          notie.alert({
+            type: 2,
+            text: 'Hay campos vacios o no validos',
+            time: 10
+          });
+        </script>
+    @endif
+    @if(Session::has('error'))
+        <script>
+          notie.alert({
+            type: 3,
+            text: 'Error al guardar el administrador',
+            time: 10
+          });
+        </script>
+    @endif
+    @if(Session::has('ok-editar'))
+        <script>
+          notie.alert({
+            type: 1,
+            text: 'Administrador editado correctamente',
+            time: 10
+          });
+        </script>
+    @endif
 @endsection
