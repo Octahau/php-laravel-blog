@@ -83,8 +83,21 @@
                       <td>
                         <div class="btn-group">
                           <a href="{{url('/')}}/administradores/{{$administrador["id"]}}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt text-white"></i></a>
+                          
+                          <button class="btn btn-danger btn-sm eliminarRegistro"
+                            data-action="{{ url('/administradores/' . $administrador->id) }}"
+                            data-method="DELETE"
+                            data-token="{{ csrf_token() }}"
+                            data-pagina="administradores">
+                            <i class="fas fa-trash-alt"></i>
+                          </button>
 
-                          <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt "></i></button>
+                          {{-- <form method="POST" action="{{url('/')}}/administradores/{{$administrador["id"]}}">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt "></i></button>
+                        </form> --}}
+
                         </div>
                       </td>
                     </tr>
@@ -278,9 +291,9 @@ Editar Administrador Modal
                     </div>
                     <br>
                     @if($value["foto"] == "")
-                    <img src="{{url('/')}}/img/administradores/homero.jpg" class = "previsualizarImg img-fluid py-2 w-25 rounded-circle" alt="imagen del administrador">
+                    <img src="{{url('/')}}/img/administradores/homero.jpg" class = "previsualizarImg_foto img-fluid py-2 w-25 rounded-circle" alt="imagen del administrador">
                     @else
-                      <img src="{{url('/')}}/{{$value["foto"]}}" class = "previsualizarImg img-fluid py-2 w-25 rounded-circle" alt="imagen del administrador">
+                      <img src="{{url('/')}}/{{$value["foto"]}}" class = "previsualizarImg_foto img-fluid py-2 w-25 rounded-circle" alt="imagen del administrador">
                     @endif
                     <input type="hidden" value="{{$value["foto"]}}" name="foto_actual">
                     <p class="help-block small">Dimensiones 200px x 200px | Peso Max 2MB | Formato JPG o PNG</p>
