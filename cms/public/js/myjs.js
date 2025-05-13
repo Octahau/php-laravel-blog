@@ -260,3 +260,83 @@ $(document).on("click", ".eliminarRegistro", function()
         }
     });
 });
+
+/*==============================
+Datatable servidor de contenido
+===============================*/
+$.ajax({
+    url: ruta + "/administradores",
+    success: function(respuesta) 
+    {
+        console.log("respuesta", respuesta);
+    },
+    error: function(jqXHR, textStatus, errorThrown) 
+    { console.error("Error en la carga de datos: ", textStatus, errorThrown);
+        notie.alert({
+            type: 3,
+            text: 'Error al cargar los datos',
+            time: 7
+        });
+    }
+});
+
+/*==============================
+Tabala de contenido
+===============================*/
+$("#tablaAdministradores").DataTable({
+    
+    processing: true,
+    serverSide: true,
+    ajax: {
+        url: ruta + "/administradores"},
+    columns: [
+        {data: 'id', name: 'id'},
+        {data: 'name', name: 'name'},
+        {data: 'email', name: 'email'},
+        {data: 'foto', name: 'foto', orderable: false, searchable: false, render: function(data, type, full, meta) {
+            if (data === null || data === "") {
+                return `<img src="${ruta}/img/Administradores/default.jpg" class="img-fluid rounded-circle">`;
+            } else {
+                return `<img src="${ruta}/${data}" class="img-fluid rounded-circle">`;
+            }
+        }
+        },
+        {data: 'rol', name: 'rol', render: function(data, type, full, meta) {
+            if (data === null || data === "") {
+                return 'administrador';
+            }
+            else {    
+                return data;
+            }},
+            orderable: true
+        },
+        {data: 'id', name: 'id'}
+    ],
+    
+    "language": {
+	    "sProcessing": "Procesando...",
+	    "sLengthMenu": "Mostrar _MENU_ registros",
+	    "sZeroRecords": "No se encontraron resultados",
+	    "sEmptyTable": "Ningún dato disponible en esta tabla",
+	    "sInfo": "Mostrando registros del _START_ al _END_",
+	    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+	    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+	    "sInfoPostFix": "",
+	    "sSearch": "Buscar:",
+	    "sUrl": "",
+	    "sInfoThousands": ",",
+	    "sLoadingRecords": "Cargando...",
+	    "oPaginate": {
+        "sFirst": "Primero",
+        "sLast": "Último",
+        "sNext": "Siguiente",
+        "sPrevious": "Anterior"
+    },
+	    "oAria": 
+        {
+            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+
+}
+});

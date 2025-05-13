@@ -30,6 +30,11 @@
 	{{-- NOTIE --}}
 	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/notie.css">
 
+	{{-- DATATABLE --}}
+	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/datatables.bootstrap4.min.css">
+	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/responsive.bootstrap.min.css">
+
+
 	{{-- CSS AdminLTE --}}
 	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/adminlte.min.css">
 
@@ -56,6 +61,12 @@
 
 	{{-- jquery.overlayScrollbars.min.js --}}
 	<script src="{{ url('/') }}/js/plugins/jquery.overlayScrollbars.min.js"></script>
+
+	{{--DATATABLE --}}
+	<script src="{{ url('/') }}/js/plugins/jquery.dataTables.min.js"></script>
+	<script src="{{ url('/') }}/js/plugins/dataTables.bootstrap4.min.js"></script>
+	<script src="{{ url('/') }}/js/plugins/dataTables.responsive.min.js"></script>
+	<script src="{{ url('/') }}/js/plugins/responsive.bootstrap.min.js"></script>
 
 	{{-- TAGS INPUT --}}
 	{{-- https://www.jqueryscript.net/form/Bootstrap-4-Tag-Input-Plugin-jQuery.html --}}
