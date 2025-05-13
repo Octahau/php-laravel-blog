@@ -59,11 +59,16 @@
 
 	{{-- TAGS INPUT --}}
 	{{-- https://www.jqueryscript.net/form/Bootstrap-4-Tag-Input-Plugin-jQuery.html --}}
-	<script src="{{ url('/') }}/js/plugins/tagsinput.js"></script>
+	
+	{{-- SWEETALERT --}}
+	<script src="{{ url('/') }}/js/plugins/sweetalert.js"></script>
 
 	{{-- SUMMERNOTE --}}
 	{{-- https://summernote.org/ --}}
 	<script src="{{ url('/') }}/js/plugins/summernote.js"></script>
+
+	<script src="{{ url('/') }}/js/plugins/tagsinput.js"></script>
+
 
 	{{-- NOTIE --}}
 	{{-- https://github.com/jaredreich/notie --}}

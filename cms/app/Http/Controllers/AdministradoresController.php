@@ -119,4 +119,25 @@ class AdministradoresController extends Controller
             return redirect("/administradores")->with("error", "");
         }
     }
+    /*======================================
+            ELIMINAR UN REGISTROS
+    ========================================*/
+    public function destroy($id, Request $request)
+    {
+        $validar = Administradores::where("id", $id)->get();
+        
+
+        if(!empty($validar) && $id != 1)
+        {
+            if (!empty($validar[0]["foto"]) && file_exists($validar[0]["foto"]) && is_file($validar[0]["foto"])) {
+                unlink($validar[0]["foto"]);
+            }
+            $administradores = Administradores::where("id", $id)->delete();
+            return "ok";
+        }
+        else
+        {
+            return "no-eliminar";
+        }
+    }
 }

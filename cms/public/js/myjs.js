@@ -179,3 +179,84 @@ $("input[type='file']").change(function()
         }); 
     }
 });
+/*==============================
+Confirmar eliminacion registro
+===============================*/
+$(document).on("click", ".eliminarRegistro", function()
+{
+    var action = $(this).data("action");
+    var method = $(this).data("method");
+    var token = $(this).data("token");
+    var pagina = $(this).data("pagina");
+
+    swal({
+        title: "¿Está seguro de eliminar este registro?",
+        text: "¡Si no lo está, puede cancelar la acción!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Si, eliminar",
+    }).then(function(result)
+    {
+        if (result.value) 
+        {
+            var datos = new FormData();
+            datos.append("_method", method);
+            datos.append("_token", token);
+
+            $.ajax({
+                url: action,
+                type: "POST",
+                data: datos,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(respuesta)
+                {
+                    if (respuesta === "ok") 
+                    {
+                        swal({
+                            title: "¡Eliminado!",
+                            text: "El registro ha sido eliminado.",
+                            type: "success",
+                            showConfirmButton: true,
+                            confirmButtonText: "Cerrar"
+                        }).then(function(result)
+                        {
+                            if (result.value) 
+                            {
+                                window.location = ruta + "/" + pagina;
+                            }
+                        });
+                    }
+                    else 
+                    {
+                        notie.alert({
+                            type: 2,
+                            text: 'No se pudo eliminar el administrador',
+                            time: 10
+                        }).then(function(result)
+                        {
+                            if (result.value) 
+                            {
+                                window.location = ruta + "/" + pagina;
+                            }
+                        });
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("Error en la eliminación del registro: ", textStatus, errorThrown);
+                    swal({
+                        title: "Error",
+                        text: "No se pudo eliminar el registro.",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+                    });
+                }
+            });
+        }
+    });
+});
