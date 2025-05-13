@@ -53,7 +53,7 @@
 
             <div class="card-body">
 
-              <table class="table table-bordered table-striped" width="100%">
+              <table class="table table-bordered table-striped dt-responsive" id="tablaAdministradores" width="100%">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -65,7 +65,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($administradores as $key => $administrador)
+                  {{-- @foreach($administradores as $key => $administrador)
                     <tr>
                       <td>{{$key + 1}}</td>
                       <td>{{$administrador->name}}</td>
@@ -98,10 +98,10 @@
                             <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt "></i></button>
                         </form> --}}
 
-                        </div>
+                        {{-- </div>
                       </td>
-                    </tr>
-                    @endforeach
+                    </tr> --}}
+                    {{-- @endforeach --}} 
                 </tbody>
               </table>
 
