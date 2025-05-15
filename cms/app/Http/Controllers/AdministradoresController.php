@@ -21,7 +21,26 @@ class AdministradoresController extends Controller
         // return view('paginas.administradores', array("administradores" => $administradores, 'blog' => $blog));
         if(request()->ajax())
         {
-            return datatables()->of(Administradores::all())->make(true);
+            return datatables()->of(Administradores::all())
+            ->addColumn('acciones', function($data)
+            {
+                $acciones = '<div class="btn-group">
+                                <a href="'.url()->current().'/'.$data->id.'" class="btn btn-warning btn-sm">
+                                <i class="fas fa-pencil-alt text-white"></i>
+                                </a>
+
+                                <button class="btn btn-danger btn-sm eliminarRegistro"
+                                    data-action="' . url()->current() . '/' . $data->id . '"
+                                    data-method="DELETE"
+                                    data-token="' . csrf_token() . '"
+                                    data-pagina="administradores">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>';
+                return $acciones;
+            })
+            ->rawColumns(['acciones'])
+            ->make(true);
         }
         return view("paginas.administradores",array('blog' => $blog));
     }
