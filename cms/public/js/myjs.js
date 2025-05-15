@@ -283,13 +283,20 @@ $.ajax({
 /*==============================
 Tabala de contenido
 ===============================*/
-$("#tablaAdministradores").DataTable({
+var tablaAdministradores = $("#tablaAdministradores").DataTable({
     
     processing: true,
     serverSide: true,
     ajax: {
-        url: ruta + "/administradores"},
-    columns: [
+        url: ruta + "/administradores"
+    },
+    "columnDefs":[{
+        "searchable": true,
+        "orderable": true,
+        "targets": 0
+    }],
+    "order": [[0, "asc"]],
+        columns: [
         {data: 'id', name: 'id'},
         {data: 'name', name: 'name'},
         {data: 'email', name: 'email'},
@@ -310,9 +317,8 @@ $("#tablaAdministradores").DataTable({
             }},
             orderable: true
         },
-        {data: 'id', name: 'id'}
-    ],
-    
+        {data: 'acciones', name: 'acciones'}
+    ],  
     "language": {
 	    "sProcessing": "Procesando...",
 	    "sLengthMenu": "Mostrar _MENU_ registros",
@@ -340,3 +346,9 @@ $("#tablaAdministradores").DataTable({
 
 }
 });
+
+tablaAdministradores.on('order.dt search.dt', function() { 
+    tablaAdministradores.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i) {
+        cell.innerHTML = i + 1;
+    });
+}).draw();
