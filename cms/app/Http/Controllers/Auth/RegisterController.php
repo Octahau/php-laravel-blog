@@ -28,10 +28,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected function redirectTo()
-    {
-        return route('administradores.index');
-    }
+    protected  $redirectTo = '/administradores';
+
     
     /**
      * Create a new controller instance.
@@ -40,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     /**

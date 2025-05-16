@@ -89,26 +89,30 @@
 	<script src="{{ url('/') }}/js/plugins/adminlte.js"></script>
 
 </head>
+    @if (Route::has('login'))
+		@auth
+			<body class="hold-transition sidebar-mini layout-fixed">
 
-<body class="hold-transition sidebar-mini layout-fixed">
+				<div class="wrapper">
 
-	<div class="wrapper">
+					@include('modulos.cabecera')
 
-		@include('modulos.cabecera')
+					@include('modulos.sidebar')
 
-		@include('modulos.sidebar')
-
-		@yield('content')
-<!-- esto devuelve contenido dinamico-->
-		@include('modulos.footer')
+					@yield('content')
+			<!-- esto devuelve contenido dinamico-->
+					@include('modulos.footer')
 
 
-	</div>
+				</div>
 
-<input type="hidden" id="ruta" value="{{url('/')}}">
+			<input type="hidden" id="ruta" value="{{url('/')}}">
 
-<script src="{{url('/')}}/js/myjs.js"></script>
+			<script src="{{url('/')}}/js/myjs.js"></script>
 
-</body>
-
+			</body>
+	@else
+		@include('paginas.login')
+			@endauth
+	@endif
 </html>

@@ -15,10 +15,9 @@ class AdministradoresController extends Controller
     ========================================*/
     public function index()
     {
-        // $administradores = Administradores::all();
+        $administradores = Administradores::all();
         $blog = Blog::all();
 
-        // return view('paginas.administradores', array("administradores" => $administradores, 'blog' => $blog));
         if(request()->ajax())
         {
             return datatables()->of(Administradores::all())
@@ -42,22 +41,23 @@ class AdministradoresController extends Controller
             ->rawColumns(['acciones'])
             ->make(true);
         }
-        return view("paginas.administradores",array('blog' => $blog));
+        return view("paginas.administradores",array('blog' => $blog, 'administradores' => $administradores));
     }
     /*======================================
             MOSTRAR UN REGISTRO
     ========================================*/
     public function show($id)
     {
-        $administrador = Administradores::where("id", $id) ->get();
+        $administrador= Administradores::where("id", $id) ->get();
         $blog = Blog::all();
+        $administradores = Administradores::all();
 
-        if(count($administrador) != 0){
-            return view(    'paginas.administradores', array("status" => 200, "administradores" => $administrador, 'blog' => $blog));
+        if(count($administradores) != 0){
+            return view('paginas.administradores', array("status" => 200, "administrador" => $administrador, 'blog' => $blog, 'administradores' => $administradores));
         }
         else
         {
-            return view(    'paginas.administradores', array("status" => 404));
+            return view(    'paginas.administradores', array("status" => 404, 'administradores' => $administradores));
         }
     }
     /*======================================

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\Administradores;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log; // Importar para logs
 
@@ -15,7 +16,8 @@ class BlogController extends Controller
     public function index()
     {
         $blog = Blog::all();
-        return view('paginas.blog', array('blog' => $blog));
+        $administradores = Administradores::all();
+        return view('paginas.blog', array('blog' => $blog, 'administradores' => $administradores));
     }
 
     public function update($id, Request $request)
